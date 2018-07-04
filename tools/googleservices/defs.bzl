@@ -26,8 +26,8 @@ def google_services_xml(package_name, google_services_json):
       name = name,
       srcs = [google_services_json],
       outs = outs,
-      tools = ["@rules_android//tools/googleservices:GenerateFirebaseXml"],
-      cmd = "$(location @rules_android//tools/googleservices:GenerateFirebaseXml) %s $< $@" % package_name,
+      tools = ["@tools_android//third_party/googleservices:GenerateGoogleServicesXml"],
+      cmd = "$(location @tools_android//third_party/googleservices:GenerateGoogleServicesXml) %s $< $@" % package_name,
     )
   return outs
 

@@ -39,7 +39,7 @@ import java.util.TreeMap;
  * Command line:
  * packageName inputJsonFile outputXmlFile
  */
-public class GenerateFirebaseXml {
+public class GenerateGoogleServicesXml {
 
   private static final String STATUS_DISABLED = "1";
   private static final String STATUS_ENABLED = "2";

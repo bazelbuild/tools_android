@@ -1,11 +1,4 @@
-load("@tools_android//tools/googleservices:defs.bzl", "google_services_xml")
-
-def crashlytics_android_library(
-    name,
-    package_name,
-    build_id,
-    google_services_json):
-
+def crashlytics_android_library(name, package_name, build_id, resource_files):
   _CRASHLYTICS_PROP_TEMPLATE = \
   """build_id={build_id}
 package_name={package_name}"""
@@ -55,15 +48,10 @@ package_name={package_name}"""
       cmd = "$(location @tools_android//tools/crashlytics) \"%s\" $@" % crashlytics_manifest_file_content,
   )
 
-  google_services_xml_files = google_services_xml(
-      package_name = package_name,
-      google_services_json = google_services_json,
-  )
-
   native.android_library(
       name = name,
       assets = [crashlytics_properties_file],
       assets_dir = "",
       manifest = crashlytics_manifest_file,
-      resource_files = google_services_xml_files + [crashlytics_res_values_file],
+      resource_files = [crashlytics_res_values_file] + resource_files,
   )

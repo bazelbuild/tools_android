@@ -11,7 +11,7 @@ TOOLS_ANDROID_VERSION = "0.1" # or the latest version
 
 http_archive(
     name = "tools_android",
-    strip_prefix = "tools_android-" + TOOLS_ANDROID_VERSION,
+    strip_prefix = "tools_android-%s" % TOOLS_ANDROID_VERSION,
     url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_VERSION,
 )
 

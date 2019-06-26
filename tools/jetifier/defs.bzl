@@ -24,10 +24,6 @@ def _jetify_jars_impl(ctx):
 jetify = rule(
     attrs = {
         "srcs": attr.label_list(allow_files = [".jar", ".aar"]),
-        "_jdk": attr.label(
-          default = Label("@bazel_tools//tools/jdk:current_java_runtime"),
-          providers = [java_common.JavaRuntimeInfo],
-        ),
         "_jetifier": attr.label(
             executable = True,
             allow_single_file = True,

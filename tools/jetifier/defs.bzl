@@ -23,7 +23,7 @@ def _jetify_impl(ctx):
 
 jetify = rule(
     attrs = {
-        "srcs": attr.label_list(allow_files = [".artifact", ".aar"]),
+        "srcs": attr.label_list(allow_files = [".jar", ".aar"]),
         "_jetifier": attr.label(
             executable = True,
             allow_single_file = True,

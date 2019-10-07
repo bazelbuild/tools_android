@@ -52,6 +52,7 @@ package_name={package_name}"""
       name = name,
       assets = [crashlytics_properties_file],
       assets_dir = "",
+      custom_package = package_name,
       manifest = crashlytics_manifest_file,
       resource_files = [crashlytics_res_values_file] + resource_files,
   )

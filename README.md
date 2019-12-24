@@ -29,3 +29,9 @@ example](https://github.com/bazelbuild/examples/tree/master/android/firebase-clo
 
 To integrate Crashlytics into your Android app, follow the [instructions in the
 README](tools/crashlytics/README.md) in the `crashlytics` directory.
+
+## Jetifier
+
+For an example of using
+[Jetifier](https://developer.android.com/studio/command-line/jetifier) on legacy
+libraries to use AndroidX libraries, [see this example](tools/jetifier/).

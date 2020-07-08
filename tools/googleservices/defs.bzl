@@ -9,7 +9,7 @@ def google_services_xml(package_name, google_services_json):
 
   The XML is based on a google-services.json file.
 
-  This macro assumes that the android tools repository is named "tools_android"
+  This macro assumes that the Android tools repository is named "tools_android"
   in the top-level project's WORKSPACE file.
 
   Args:

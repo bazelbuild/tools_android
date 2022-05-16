@@ -2,7 +2,7 @@ def crashlytics_android_library(name, package_name, build_id, resource_files):
   _CRASHLYTICS_PROP_TEMPLATE = \
   """build_id={build_id}
 package_name={package_name}"""
-  crashlytics_properties_file = "crashlytics-build-%s.properties" % name
+  crashlytics_properties_file = "_%s_crashlytics/crashlytics-build.properties" % name
   crashlytics_properties_file_content = _CRASHLYTICS_PROP_TEMPLATE.format(
       build_id = build_id,
       package_name = package_name,
@@ -22,7 +22,7 @@ package_name={package_name}"""
 <resources xmlns:tools=\\"http://schemas.android.com/tools\\">
     <string tools:ignore=\\"UnusedResources,TypographyDashes\\" name=\\"com.crashlytics.android.build_id\\" translatable=\\"false\\">{build_id}</string>
 </resources>"""
-  crashlytics_res_values_file = "res/values/com_crashlytics_build_id_%s.xml" % name
+  crashlytics_res_values_file = "_%s_crashlytics/res/values/com_crashlytics_build_id.xml" % name
   crashlytics_res_values_file_content = _CRASHLYTICS_RES_TEMPLATE.format(build_id = build_id)
 
   native.genrule(
@@ -38,7 +38,7 @@ package_name={package_name}"""
           package=\\"{package_name}\\">
 </manifest>
 """
-  crashlytics_manifest_file = "CrashlyticsManifest_%s.xml" % name
+  crashlytics_manifest_file = "_%s_crashlytics/CrashlyticsManifest.xml" % name
   crashlytics_manifest_file_content = _CRASHLYTICS_MANIFEST_TEMPLATE.format(package_name = package_name)
 
   native.genrule(

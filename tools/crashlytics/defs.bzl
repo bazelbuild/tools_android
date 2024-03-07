@@ -51,7 +51,7 @@ package_name={package_name}"""
   native.android_library(
       name = name,
       assets = [crashlytics_properties_file],
-      assets_dir = "",
+      assets_dir = "_%s_crashlytics" % name,
       custom_package = package_name,
       manifest = crashlytics_manifest_file,
       resource_files = [crashlytics_res_values_file] + resource_files,

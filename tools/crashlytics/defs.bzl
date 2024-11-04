@@ -32,6 +32,19 @@ package_name={package_name}"""
       cmd = "$(location @tools_android//tools/crashlytics) \"%s\" $@" % crashlytics_res_values_file_content,
   )
 
+  _CRASHLYTICS_KEEP_CONTENT = \
+  """<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<resources xmlns:tools=\\"http://schemas.android.com/tools\\"
+    tools:keep=\\"@string/com_google_firebase_crashlytics_mapping_file_id\\" />"""
+  crashlytics_res_keep_file = "_%s_crashlytics/res/raw/%s.keep.xml" % (name, package_name)
+
+  native.genrule(
+      name = "%s_crashlytics_setup_res_keep" % name,
+      outs = [crashlytics_res_keep_file],
+      tools = ["@tools_android//tools/crashlytics"],
+      cmd = "$(location @tools_android//tools/crashlytics) \"%s\" $@" % _CRASHLYTICS_KEEP_CONTENT,
+  )
+
   _CRASHLYTICS_MANIFEST_TEMPLATE = \
 """<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
 <manifest xmlns:android=\\"http://schemas.android.com/apk/res/android\\"
@@ -54,5 +67,5 @@ package_name={package_name}"""
       assets_dir = "_%s_crashlytics/assets" % name,
       custom_package = package_name,
       manifest = crashlytics_manifest_file,
-      resource_files = [crashlytics_res_values_file] + resource_files,
+      resource_files = [crashlytics_res_values_file, crashlytics_res_keep_file] + resource_files,
   )

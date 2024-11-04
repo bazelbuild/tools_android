@@ -2,7 +2,7 @@ def crashlytics_android_library(name, package_name, build_id, resource_files):
   _CRASHLYTICS_PROP_TEMPLATE = \
   """build_id={build_id}
 package_name={package_name}"""
-  crashlytics_properties_file = "_%s_crashlytics/crashlytics-build.properties" % name
+  crashlytics_properties_file = "_%s_crashlytics/assets/crashlytics-build.properties" % name
   crashlytics_properties_file_content = _CRASHLYTICS_PROP_TEMPLATE.format(
       build_id = build_id,
       package_name = package_name,
@@ -51,7 +51,7 @@ package_name={package_name}"""
   native.android_library(
       name = name,
       assets = [crashlytics_properties_file],
-      assets_dir = "",
+      assets_dir = "_%s_crashlytics/assets" % name,
       custom_package = package_name,
       manifest = crashlytics_manifest_file,
       resource_files = [crashlytics_res_values_file] + resource_files,

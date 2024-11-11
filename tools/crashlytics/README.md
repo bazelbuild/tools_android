@@ -49,7 +49,7 @@ GOOGLE_SERVICES_RESOURCES = google_services_xml(
 crashlytics_android_library(
     name = "crashlytics_lib",
     package_name = "com.example.package",
-    build_id = "9dfea8fe-4d75-48a7-ba28-4ddb7fe74780",
+    build_id = "9dfea8fe4d7548a7ba284ddb7fe74780",
     resource_files = GOOGLE_SERVICES_RESOURCES,
 )
 
@@ -62,15 +62,15 @@ android_library(
 )
 ```
 
-To generate the Build ID, we have created a tool called `generate_uuid`. Run it
-with Bazel:
+To generate the Build ID (which is a UUID without hyphens),
+we have created a tool called `generate_uuid`. Run it with Bazel:
 
 ```
 $ bazel run @tools_android//tools/crashlytics:generate_uuid
 
 ...
 
-76196b85-5620-4435-81e1-1c0515e0e271
+76196b855620443581e11c0515e0e271
 ```
 
 Finally, depend on the `crashlytics_deps` and `crashlytics_lib` libraries.

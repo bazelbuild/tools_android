@@ -4,21 +4,14 @@ This repository hosts tools for use with building Android apps with Bazel.
 
 ## Setup
 
-To use this with Bazel, add the following snippet to your WORKSPACE file:
+To use this with Bazel, add the following snippet to your MODULE.bazel file:
 
 ```python
-TOOLS_ANDROID_VERSION = "0.1" # or the latest version
-
-http_archive(
-    name = "tools_android",
-    strip_prefix = "tools_android-%s" % TOOLS_ANDROID_VERSION,
-    url = "https://github.com/bazelbuild/tools_android/archive/%s.tar.gz" % TOOLS_ANDROID_VERSION,
-)
-
-load("@tools_android//tools/googleservices:defs.bzl", "google_services_workspace_dependencies")
-
-google_services_workspace_dependencies()
+bazel_dep(name = "tools_android", version = "0.3.0")  # Or latest version
 ```
+
+Note: using WORKSPACE is deprecated. If you are still using WORKSPACE,
+the last released version to support WORKSPACE is version 0.2.0.
 
 ## Google Services XML
 

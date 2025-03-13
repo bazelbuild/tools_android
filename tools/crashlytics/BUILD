@@ -1,3 +1,5 @@
+load("@rules_java//java:defs.bzl", "java_binary", "java_library")
+
 exports_files(["defs.bzl"])
 
 java_binary(

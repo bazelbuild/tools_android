@@ -1,6 +1,6 @@
 """Macros to support Google services, e.g. Firebase Cloud Messaging."""
 
-
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
 
 
@@ -37,13 +37,3 @@ def google_services_xml(package_name, google_services_json):
       cmd = "$(location @tools_android//third_party/googleservices:GenerateGoogleServicesXml) %s $< $@" % package_name,
     )
   return outs
-
-
-def google_services_workspace_dependencies():
-  jvm_maven_import_external(
-    name = "com_google_code_gson_2_8_2",
-    artifact = "com.google.code.gson:gson:2.8.2",
-    artifact_sha256 = "b7134929f7cc7c04021ec1cc27ef63ab907e410cf0588e397b8851181eb91092",
-    server_urls = ["https://repo1.maven.org/maven2/"],
-    licenses = ["notice"],
-  )

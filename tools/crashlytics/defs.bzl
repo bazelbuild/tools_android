@@ -1,3 +1,5 @@
+load("@rules_android//android:rules.bzl", "android_library")
+
 def crashlytics_android_library(name, package_name, build_id, resource_files):
   _CRASHLYTICS_PROP_TEMPLATE = \
   """build_id={build_id}
@@ -61,7 +63,7 @@ package_name={package_name}"""
       cmd = "$(location @tools_android//tools/crashlytics) \"%s\" $@" % crashlytics_manifest_file_content,
   )
 
-  native.android_library(
+  android_library(
       name = name,
       assets = [crashlytics_properties_file],
       assets_dir = "_%s_crashlytics/assets" % name,

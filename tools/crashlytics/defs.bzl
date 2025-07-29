@@ -38,7 +38,7 @@ package_name={package_name}"""
   """<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
 <resources xmlns:tools=\\"http://schemas.android.com/tools\\"
     tools:keep=\\"@string/com_google_firebase_crashlytics_mapping_file_id\\" />"""
-  crashlytics_res_keep_file = "_%s_crashlytics/res/raw/%s.keep.xml" % (name, package_name)
+  crashlytics_res_keep_file = "_%s_crashlytics/res/raw/%s-crashlytics.keep.xml" % (name, package_name)
 
   native.genrule(
       name = "%s_crashlytics_setup_res_keep" % name,

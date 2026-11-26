@@ -73,6 +73,21 @@ $ bazel run @tools_android//tools/crashlytics:generate_uuid
 76196b855620443581e11c0515e0e271
 ```
 
+If the build id is produced by another rule rather than hard-coded in the
+BUILD file, pass it through `build_id_file` instead of `build_id`. The file's
+single line is read at build time and used as the build id:
+
+```python
+crashlytics_android_library(
+    name = "crashlytics_lib",
+    package_name = "com.example.package",
+    build_id_file = ":generated_build_id",
+    resource_files = GOOGLE_SERVICES_RESOURCES,
+)
+```
+
+Exactly one of `build_id` and `build_id_file` must be set.
+
 Finally, depend on the `crashlytics_deps` and `crashlytics_lib` libraries.
 
 ```python

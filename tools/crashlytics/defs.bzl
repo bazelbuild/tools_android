@@ -1,6 +1,13 @@
 load("@rules_android//android:rules.bzl", "android_library")
 
-def crashlytics_android_library(name, package_name, build_id, resource_files):
+def crashlytics_android_library(name, package_name, build_id = None, resource_files = [], build_id_file = None):
+  if build_id_file != None:
+    if build_id != None:
+      fail("Specify only one of build_id and build_id_file")
+    build_id = "$$(cat $(location %s))" % build_id_file
+  elif build_id == None:
+    fail("A Crashlytics build ID is required")
+  build_id_inputs = [build_id_file] if build_id_file != None else []
   _CRASHLYTICS_PROP_TEMPLATE = \
   """build_id={build_id}
 package_name={package_name}"""
@@ -12,6 +19,7 @@ package_name={package_name}"""
 
   native.genrule(
       name = "%s_crashlytics_setup_properties" % name,
+      srcs = build_id_inputs,
       outs = [crashlytics_properties_file],
       tools = ["@tools_android//tools/crashlytics"],
       cmd = "$(location @tools_android//tools/crashlytics) \"%s\" $@" % crashlytics_properties_file_content,
@@ -29,6 +37,7 @@ package_name={package_name}"""
 
   native.genrule(
       name = "%s_crashlytics_setup_res" % name,
+      srcs = build_id_inputs,
       outs = [crashlytics_res_values_file],
       tools = ["@tools_android//tools/crashlytics"],
       cmd = "$(location @tools_android//tools/crashlytics) \"%s\" $@" % crashlytics_res_values_file_content,
